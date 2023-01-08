@@ -1,0 +1,356 @@
+// Q1
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+// driver code to print the adjacent list of each vertex
+
+class Graph
+{
+	int V; // No. of vertices
+
+	// Pointer to an array containing adjacency lists
+	vector<int>* adj;
+	
+public:
+	Graph(int V) { // Constructor
+		this->V = V;
+		adj = new vector<int>[V];
+	}
+	void addEdge(int v, int w) { // function to add an edge to graph
+		adj[v].push_back(w); // Add w to v’s list.
+		adj[w].push_back(v); // Add v to w’s list.
+	} 
+	void printGraph()
+	{
+		for (int v = 0; v < V; ++v)
+		{
+			cout << "\n Adjacency list of vertex "
+				<< v << "\n head ";
+			for (auto x : adj[v])
+				cout << "-> " << x;
+			cout << endl;
+		}
+	}
+};
+
+// Driver code
+
+int main()
+{
+	// create the graph given in above figure
+	int V = 5;
+	Graph g(V);
+	g.addEdge(0, 1);
+	g.addEdge(0, 4);
+	g.addEdge(1, 2);
+	g.addEdge(1, 3);
+	g.addEdge(1, 4);
+	g.addEdge(2, 3);
+	g.addEdge(3, 4);
+
+	g.printGraph();
+
+	return 0;
+}
+
+// Q2
+#include <iostream>
+#include <vector>
+#include <queue>
+
+using namespace std;
+
+// Create a Templet type of Graph class through doubly linked list which have
+// above functionality
+template <typename T>
+class Graph {
+	// Create a node class which will be used to create a node of graph
+	class Node {
+	public:
+		T data;
+		vector<Node*> neighbours;
+		bool visited;
+		Node(T data) {
+			this->data = data;
+			this->visited = false;
+		}
+	};
+
+	// Create a vector of nodes which will be used to store the nodes of graph
+	vector<Node*> nodes;
+
+public:
+	// Create a node of graph and add it to the vector of nodes
+	void addNode(T data) {
+		Node* node = new Node(data);
+		nodes.push_back(node);
+	}
+
+	// Add an edge between two nodes of graph
+	void addEdge(T data1, T data2) {
+		Node* node1 = getNode(data1);
+		Node* node2 = getNode(data2);
+		node1->neighbours.push_back(node2);
+		node2->neighbours.push_back(node1);
+	}
+
+	// Get the node of graph by its data
+	Node* getNode(T data) {
+		for (int i = 0; i < nodes.size(); i++) {
+			if (nodes[i]->data == data) {
+				return nodes[i];
+			}
+		}
+		return NULL;
+	}
+
+	// Print the graph
+	void printGraph() {
+		for (int i = 0; i < nodes.size(); i++) {
+			cout << nodes[i]->data << " : ";
+			for (int j = 0; j < nodes[i]->neighbours.size(); j++) {
+				cout << nodes[i]->neighbours[j]->data << " ";
+			}
+			cout << endl;
+		}
+	}
+
+	// DFS traversal of graph
+	void dfs(Node* node) {
+		if (node == NULL) {
+			return;
+		}
+		node->visited = true;
+		cout << node->data << " ";
+		for (int i = 0; i < node->neighbours.size(); i++) {
+			if (!node->neighbours[i]->visited) {
+				dfs(node->neighbours[i]);
+			}
+		}
+	}
+
+	// DFS traversal of graph
+	void dfs(T data) {
+		Node* node = getNode(data);
+		dfs(node);
+	}
+
+	// BFS traversal of graph
+	void bfs(Node* node) {
+		if (node == NULL) {
+			return;
+		}
+		queue<Node*> q;
+		q.push(node);
+		node->visited = true;
+		while (!q.empty()) {
+			Node* temp = q.front();
+			q.pop();
+			cout << temp->data << " ";
+			for (int i = 0; i < temp->neighbours.size(); i++) {
+				if (!temp->neighbours[i]->visited) {
+					q.push(temp->neighbours[i]);
+					temp->neighbours[i]->visited = true;
+				}
+			}
+		}
+	}
+	
+	// BFS traversal of graph
+	void bfs(T data) {
+		Node* node = getNode(data);
+		bfs(node);
+	}
+};
+
+int main() {
+	Graph<int> g;
+	g.addNode(1);
+	g.addNode(2);
+	g.addNode(3);
+	g.addNode(4);
+	g.addNode(5);
+	g.addNode(6);
+	g.addNode(7);
+	g.addEdge(1, 2);
+	g.addEdge(1, 3);
+	g.addEdge(2, 4);
+	g.addEdge(2, 5);
+	g.addEdge(3, 6);
+	g.addEdge(3, 7);
+	g.printGraph();
+	cout << "DFS : ";
+	g.dfs(1);
+	cout << endl;
+	cout << "BFS : ";
+	g.bfs(1);
+	cout << endl;
+	return 0;
+}
+
+// Q3
+#include <iostream>
+#include <list>
+
+using namespace std;
+
+class Graph
+{
+	int V;    // No. of vertices
+	list<int>* adj;    // Pointer to an array containing adjacency lists
+public:
+	Graph(int V);  // Constructor
+	void addEdge(int v, int w); // function to add an edge to graph
+	void BFS(int s);  // prints BFS traversal from a given source s
+};
+
+Graph::Graph(int V)
+{
+	this->V = V;
+	adj = new list<int>[V];
+}
+
+void Graph::addEdge(int v, int w)
+{
+	adj[v].push_back(w); // Add w to v’s list.
+}
+
+void Graph::BFS(int s)
+{
+	// Mark all the vertices as not visited
+	bool* visited = new bool[V];
+	for (int i = 0; i < V; i++)
+		visited[i] = false;
+
+	// Create a queue for BFS
+	list<int> queue;
+
+	// Mark the current node as visited and enqueue it
+	visited[s] = true;
+	queue.push_back(s);
+
+	// 'i' will be used to get all adjacent vertices of a vertex
+	list<int>::iterator i;
+
+	while (!queue.empty())
+	{
+		// Dequeue a vertex from queue and print it
+		s = queue.front();
+		cout << s << " ";
+		queue.pop_front();
+
+		// Get all adjacent vertices of the dequeued vertex s
+		// If a adjacent has not been visited, then mark it visited
+		// and enqueue it
+		for (i = adj[s].begin(); i != adj[s].end(); ++i)
+		{
+			if (!visited[*i])
+			{
+				visited[*i] = true;
+				queue.push_back(*i);
+			}
+		}
+	}
+}
+
+// Driver program to test methods of graph class
+int main()
+{
+	Graph G(7);
+	G.addEdge(0, 2);
+	G.addEdge(1, 2);
+	G.addEdge(5, 6);
+	G.addEdge(3, 1);
+	G.addEdge(3, 3);
+	G.addEdge(3, 5);
+	G.addEdge(1, 6);
+	G.addEdge(2, 4);
+	G.addEdge(1, 3);
+	G.addEdge(5, 4);
+	G.BFS(0);
+}
+
+// Q4
+#include <iostream>
+#include <vector>
+#include <stack>
+
+using namespace std;
+
+// This class represents a directed graph using adjacency list representation
+class Graph
+{
+    int numVertices;    // Number of vertices in the graph
+    vector<int>* adj;   // Pointer to an array containing adjacency lists
+
+    // A recursive function used by DFS
+    void DFSUtil(int vertex, vector<bool>& visited)
+    {
+        // Mark the current node as visited and print it
+        visited[vertex] = true;
+        cout << vertex << " ";
+
+        // Recurse for all the vertices adjacent to this vertex
+        for (int i = 0; i < adj[vertex].size(); ++i)
+            if (!visited[adj[vertex][i]])
+                DFSUtil(adj[vertex][i], visited);
+    }
+
+public:
+    // Constructor
+    Graph(int numVertices)
+    {
+        this->numVertices = numVertices;
+        adj = new vector<int>[numVertices];
+    }
+
+    // Function to add an edge to the graph
+    void addEdge(int v, int w)
+    {
+        adj[v].push_back(w);
+    }
+
+    // DFS traversal of the vertices reachable from vertex
+    void DFS(int vertex)
+    {
+        // Mark all the vertices as not visited
+        vector<bool> visited(numVertices, false);
+
+        // Call the recursive helper function to print DFS traversal
+        DFSUtil(vertex, visited);
+    }
+};
+
+
+
+// Driver Code
+
+int main()
+{
+	// Create a graph given in the above diagram
+	Graph g(6);
+	g.addEdge(0, 2);
+	g.addEdge(0, 1);
+	g.addEdge(0, 5);
+	g.addEdge(1, 0);
+	g.addEdge(1, 2);
+	g.addEdge(2, 0);
+	g.addEdge(2, 1);
+	g.addEdge(2, 3);
+	g.addEdge(2, 4);
+	g.addEdge(3, 2);
+	g.addEdge(3, 4);
+	g.addEdge(3, 5);
+	g.addEdge(4, 2);
+	g.addEdge(4, 3);
+	g.addEdge(5, 0);
+	g.addEdge(5, 3);
+	
+	g.DFS(3);
+
+	return 0;
+}
+
+

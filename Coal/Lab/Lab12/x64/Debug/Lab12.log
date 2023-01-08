@@ -1,0 +1,5 @@
+﻿  Assembling Lab12.asm...
+Lab12.asm(1): error A2008: syntax error : .
+Lab12.asm(2): error A2008: syntax error : .
+Lab12.asm(3): error A2008: syntax error : .
+D:\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\BuildCustomizations\masm.targets(70,5): error MSB3721: The command "ml64.exe /c /nologo /Zi /Fo"x64\Debug\Lab12.obj" /W3 /errorReport:prompt  /TaLab12.asm" exited with code 1.

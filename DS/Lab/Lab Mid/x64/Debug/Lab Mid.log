@@ -1,0 +1,10 @@
+﻿  t05.c
+D:\University\Semester3\DS\Lab\Lab Mid\t05.c(25,3): error C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\University\Semester3\DS\Lab\Lab Mid\t05.c(26,3): error C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\University\Semester3\DS\Lab\Lab Mid\t05.c(28,3): error C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\University\Semester3\DS\Lab\Lab Mid\t05.c(50,56): warning C4305: 'function': truncation from 'double' to 'float'
+  t05util.c
+D:\University\Semester3\DS\Lab\Lab Mid\t05util.c(18,3): error C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\University\Semester3\DS\Lab\Lab Mid\t05util.c(19,3): error C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\University\Semester3\DS\Lab\Lab Mid\t05util.c(21,3): error C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  Generating Code...

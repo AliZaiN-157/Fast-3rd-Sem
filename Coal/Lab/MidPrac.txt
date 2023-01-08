@@ -1,0 +1,142 @@
+TITLE QUESTION Factorial
+INCLUDE Irvine32.inc
+.data 
+
+QUESTION BYTE "Enter a number to find factorial ", 0
+ANSWER BYTE "Factorial of given number is ", 0
+
+.code
+MAIN PROC
+
+	mov edx, OFFSET QUESTION
+	call WriteString
+	call readint ; cin >> eax
+	mov edx, OFFSET ANSWER
+	call WriteString
+	mov ecx, eax
+	mov eax, 1
+	factorial:
+		imul eax, ecx
+	loop factorial
+	call Writedec
+
+call crlf
+exit
+MAIN ENDP
+END MAIN
+=====================================================================================================================================================
+TITLE QUESTION Sum of Array
+INCLUDE Irvine32.inc
+.data 
+
+Arr1 DWORD 12,-2,5
+
+.code
+MAIN PROC
+
+mov ebx, offset Arr1
+mov eax, 0
+mov ecx, LENGTHOF Arr1
+
+L1:
+	add eax, [ebx]
+	add ebx, TYPE Arr1
+	loop L1
+	call writeint
+
+exit
+MAIN ENDP
+END MAIN
+=====================================================================================================================================================
+;Take input into array from user
+INCLUDE Irvine32.inc
+.data
+intArray DWORD ?, ?, ?, ?, ?
+msg BYTE "Enter 5 numbers= ", 0
+msg1 BYTE "The 5 numbers= ", 0
+
+.code
+main PROC
+mov esi, 0
+mov eax, 0
+mov ecx, LENGTHOF intArray
+
+mov edx, OFFSET msg
+call WriteString
+L1:
+call readint
+mov [intArray + esi], eax
+add esi, TYPE intArray
+loop L1
+
+call crlf
+
+mov esi, 0
+mov eax, 0
+mov ecx, LENGTHOF intArray
+mov edx, OFFSET msg1
+call WriteString
+
+L2:
+mov eax, intArray[esi]
+add esi, TYPE intArray
+call writedec
+call crlf
+loop L2
+exit
+main ENDP
+END main
+
+========================================================================
+; Printing Sequence
+INCLUDE Irvine32.inc
+.data
+
+seq BYTE "Sequence: ",0
+start dword 3
+terminate dword 30
+comma BYTE ", ",0
+
+.code
+main PROC
+
+mov eax, start
+mov ecx, 10
+mov edx, offset seq
+call writestring
+loop1:
+	call writedec
+	cmp eax, terminate
+	jg endloop1
+	mov edx, offset comma
+	call writestring
+	add eax,3
+	
+loop loop1
+endloop1:
+
+exit
+main ENDP
+END main
+
+======================================================================================================================================
+INCLUDE Irvine32.inc
+.data
+
+var1 BYTE "Purple",0
+
+.code
+main PROC
+
+mov esi,2
+movzx ax, var1[esi * TYPE var1]
+call writeChar // r
+call crlf
+call waitmsg
+
+exit
+main ENDP
+END main
+
+=====================================================================================================================================================
+

@@ -1,0 +1,4 @@
+﻿  Assembling Lab12.asm...
+Debug\Lab12.obj : warning LNK4042: object specified more than once; extras ignored
+LINK : error LNK2001: unresolved external symbol _mainCRTStartup
+D:\University\Semester3\Coal\Lab\Lab12\Debug\Lab12.exe : fatal error LNK1120: 1 unresolved externals

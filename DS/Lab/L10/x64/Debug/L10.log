@@ -1,0 +1,4 @@
+﻿  HuffmanEncodingDecoding.cpp
+D:\University\Semester3\DS\Lab\L10\HuffmanEncodingDecoding.cpp(127,28): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\University\Semester3\DS\Lab\L10\HuffmanEncodingDecoding.cpp(128,27): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  L10.vcxproj -> D:\University\Semester3\DS\Lab\L10\x64\Debug\L10.exe

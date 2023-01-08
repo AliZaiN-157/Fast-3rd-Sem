@@ -1,0 +1,3 @@
+﻿  CheckDuplicate.cpp
+D:\University\Semester3\DS\Theory\StacksNQueues\CheckDuplicate.cpp(13,20): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  StacksNQueues.vcxproj -> D:\University\Semester3\DS\Theory\StacksNQueues\x64\Debug\StacksNQueues.exe

@@ -1,0 +1,31 @@
+#include <algorithm>
+#include <climits>
+
+struct TreeNode {
+  int val;
+  TreeNode* left;
+  TreeNode* right;
+  TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+};
+
+int largestBST(TreeNode* root) {
+  if (root == NULL) return 0;
+
+  // If the tree is a BST, return its size
+  if (isBST(root, INT_MIN, INT_MAX)) return size(root);
+
+  // Otherwise, return the maximum size of a BST in the left and right subtrees
+  return std::max(largestBST(root->left), largestBST(root->right));
+}
+
+bool isBST(TreeNode* root, int minVal, int maxVal) {
+  if (root == NULL) return true;
+  if (root->val < minVal || root->val > maxVal) return false;
+  return isBST(root->left, minVal, root->val - 1) &&
+         isBST(root->right, root->val + 1, maxVal);
+}
+
+int size(TreeNode* root) {
+  if (root == NULL) return 0;
+  return 1 + size(root->left) + size(root->right);
+}

@@ -1,0 +1,118 @@
+#include <iostream>
+
+using namespace std;
+
+class Node {
+public:
+	int data;
+	Node* next;
+	Node* prev;
+	Node(int data) {
+		this->data = data;
+		this->next = NULL;
+		this->prev = NULL;
+	}
+
+	Node()
+	{
+		this->data = 0;
+		this->next = NULL;
+		this->prev = NULL;
+	}
+};
+
+class LinkedList {
+public:
+	Node* head;
+	Node* tail;
+	int size;
+	LinkedList() {
+		this->head = NULL;
+		this->tail = NULL;
+		this->size = 0;
+	}
+
+	void addLast(int data) {
+		Node* nn = new Node(data);
+		if (this->size == 0) {
+			this->head = nn;
+			this->tail = nn;
+		}
+		else {
+			this->tail->next = nn;
+			nn->prev = this->tail;
+			this->tail = nn;
+		}
+		this->size++;
+	}
+
+	void display() {
+		Node* temp = this->head;
+		while (temp != NULL) {
+			cout << temp->data << " ";
+			cout << temp->next << " ";
+		
+			temp = temp->next;
+			cout << endl;
+		}
+		cout << endl;
+	}
+
+	void sort() {
+		// Initialize sorted linked list
+		Node* sorted = NULL;
+
+		// Traverse the given linked list and insert every
+		// node to sorted
+		Node* current = head;
+		while (current != NULL)
+		{
+			// Store next for next iteration
+			Node* next = current->next;
+			Node* temp;
+
+			if (sorted == NULL || (sorted)->data >= current->data)
+			{
+				current->next = sorted;
+				sorted = current;
+			}
+			else
+			{
+				/* Locate the node before the point of insertion */
+				temp = sorted;
+				while (temp->next != NULL &&
+					temp->next->data < current->data)
+				{
+					temp = temp->next;
+				}
+				current->next = temp->next;
+				temp->next = current;
+			}
+			
+
+			// Update current
+			current = next;
+		}
+
+		head = sorted;
+	}
+	
+	
+};
+
+
+int main() {
+	
+	LinkedList l;
+	l.addLast(20);
+	l.addLast(1);
+	l.addLast(12);
+	l.addLast(3);
+	l.addLast(43);
+	l.addLast(29);
+	
+	l.display();
+	l.sort();
+	l.display();
+	
+}

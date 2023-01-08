@@ -1,0 +1,3 @@
+﻿  Full_sorting.cpp
+D:\University\Semester3\DS\Theory\Mid-I\Full_sorting.cpp(90,11): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+  Mid-I.vcxproj -> D:\University\Semester3\DS\Theory\Mid-I\x64\Debug\Mid-I.exe
